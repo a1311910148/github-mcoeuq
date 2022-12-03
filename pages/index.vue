@@ -7,5 +7,16 @@
 </template>
 
 <script>
-export {};
+export default {
+  setup() {
+    let list = ref(null);
+    const appConfig = useAppConfig();
+    console.log(appConfig);
+    useFetch('/api/goods').then((res) => {
+      list.value = res.data;
+    });
+    return { list };
+  },
+  created() {},
+};
 </script>
