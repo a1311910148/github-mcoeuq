@@ -4,12 +4,6 @@ FROM golang:1.20 AS builder
 # 设置工作目录
 WORKDIR /app
 
-# 将 go.mod 和 go.sum 复制到工作目录
-COPY go.mod go.sum ./
-
-# 下载依赖
-RUN go mod download
-
 # 将源代码复制到工作目录
 COPY main.go .
 
