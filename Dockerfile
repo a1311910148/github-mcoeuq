@@ -8,7 +8,7 @@ WORKDIR /app
 COPY main.go .
 
 # 构建可执行文件
-RUN go build -o myapp .
+RUN go build -o myapp main.go
 
 # 使用轻量级的基础镜像
 FROM alpine:latest
