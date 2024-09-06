@@ -29,3 +29,11 @@ jobs:
     - run: npm install 
     - run: npm run build
     - run: npm run generate
+    
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist  # 修改为你的静态文件输出目录
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
