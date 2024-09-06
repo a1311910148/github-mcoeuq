@@ -1,0 +1,1 @@
+import{_ as o}from"./message.18556953.js";import{a as t,b as a,e as s,f as n,o as c}from"./entry.59c2dc56.js";const r={};function _(p,m,f,u,d,i){const e=o;return c(),a("div",null,[s(e,{message:"\u6B22\u8FCE\u6765\u5230\u5173\u4E8E\u9875\u9762"}),n(" about\u9875\u9762 ")])}const $=t(r,[["render",_]]);export{$ as default};
