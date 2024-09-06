@@ -1,21 +1,29 @@
-FROM golang:alpine as builder
+# 使用官方 Go 镜像作为基础镜像
+FROM golang:1.20 AS builder
 
-RUN apk --no-cache add git
+# 设置工作目录
+WORKDIR /app
 
-WORKDIR /go/src/github.com/go/helloworld/
+# 将 go.mod 和 go.sum 复制到工作目录
+COPY go.mod go.sum ./
 
-RUN go get -d -v github.com/go-sql-driver/mysql
+# 下载依赖
+RUN go mod download
 
+# 将源代码复制到工作目录
 COPY main.go .
 
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app .
+# 构建可执行文件
+RUN go build -o myapp .
 
-FROM alpine:latest as prod
+# 使用轻量级的基础镜像
+FROM alpine:latest
 
-RUN apk --no-cache add ca-certificates
-
+# 设置工作目录
 WORKDIR /root/
 
-COPY --from=0 /go/src/github.com/go/helloworld/app .
+# 从构建阶段复制可执行文件
+COPY --from=builder /app/myapp .
 
-CMD ["./app"]
+# 指定容器启动时执行的命令
+CMD ["./myapp"]
